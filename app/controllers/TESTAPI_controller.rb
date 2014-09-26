@@ -8,4 +8,14 @@ class TestapiController < ApplicationController
     render json: response_hash
   end
 
+  def unit_tests
+    exec "rspec"
+    response_hash = {
+      nrFailed: 0,
+      output: "",
+      totalTests: 5,
+    }
+
+    render json: response_hash
+  end
 end

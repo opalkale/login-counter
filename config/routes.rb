@@ -16,9 +16,10 @@ Rails.application.routes.draw do
   
   post '/TESTAPI/resetFixture' => 'testapi#reset_fixture'
   get '/TESTAPI/resetFixture' => 'testapi#reset_fixture'
-  
-  # post '/TESTAPI/unitTests' => 'TESTAPI/unitTests'
 
+  post '/TESTAPI/unitTests' => 'testapi#unit_tests'
+  get '/TESTAPI/unitTests' => 'testapi#unit_tests'
+ 
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

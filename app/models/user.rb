@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
     end
 
     # Validate password length is <= 128 chars.
-    if password.length > MAX_PASSWORD_LENGTH
+    if password.present? && password.length > MAX_PASSWORD_LENGTH
       return ERR_BAD_PASSWORD
     end
 
@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
 
     # Validates that the username exists.
     if current_user.nil?
-       return ERR_BAD_CREDENTIALS
+      return ERR_BAD_CREDENTIALS
     
     # Validates the password for the given username, increments, saves, and returns the login count.
     elsif password == current_user.password
@@ -68,8 +68,12 @@ class User < ActiveRecord::Base
     
     else
       return ERR_BAD_CREDENTIALS
-
     end
+  end
+
+  def self.TESTAPI_resetFixture
+    User.destroy_all
+    SUCCESS
   end
 
 end

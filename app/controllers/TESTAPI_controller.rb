@@ -11,7 +11,7 @@ class TestapiController < ApplicationController
   def unit_tests
     result = %x[rspec]
     total_tests = result.split(" examples")[0].split("\n")[-1].to_i
-    failed_tests = result.split(" failures")[0.split(", ")][-1].to_i
+    failed_tests = result.split(" failures")[0].split(", ")][-1].to_i
     
     response_hash = {
       nrFailed: failed_tests,

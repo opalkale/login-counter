@@ -50,6 +50,8 @@ class User < ActiveRecord::Base
   
   end
 
+  # negative number is an error
+  # positive integer is success (which is errcode 1)
   def self.login(username, password)
     
     # Finds a user object given the username.

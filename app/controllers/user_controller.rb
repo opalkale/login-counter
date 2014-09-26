@@ -41,4 +41,8 @@ class UserController < ApplicationController
     render json: response_hash
   end
 
+  # Testing endpoint for heroku.
+  def home
+    render json: "hi"
+  end
 end

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
+  root 'user#home'
   post '/users/add' => 'user#add'
   get  '/users/add' => 'user#add'
 

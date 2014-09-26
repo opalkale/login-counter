@@ -43,6 +43,6 @@ class UserController < ApplicationController
 
   # Testing endpoint for heroku.
   def home
-    render json: "hi"
+    render json: "opal kale's cs169 project"
   end
 end

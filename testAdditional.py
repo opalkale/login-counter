@@ -33,8 +33,41 @@ class TestAddUser(testLib.RestTestCase):
             expected['count']  = count
         self.assertDictEqual(expected, respData)
 
+
+    # Tests for adding a user.
+
     def testAdd1(self):
         respData = self.makeRequest("/users/add", method="POST", data = { 'user' : 'user1', 'password' : 'password'} )
         self.assertResponse(respData, count = 1)
+
+    def testAdd2(self):
+        respData = self.makeRequest("/users/add", method="POST", data = { 'user' : 'user1', 'password' : 'password'} )
+        respData = self.makeRequest("/users/add", method="POST", data = { 'user' : 'user1', 'password' :'password2'} )
+        self.assertResponse(respData, count = None, errCode = testLib.RestTestCase.ERR_USER_EXISTS)
+
+    def testAdd3(self):
+        respData = self.makeRequest("/users/add", method="POST", data = { 'user' : '', 'password' : 'password'} )
+        self.assertResponse(respData, count = None, errCode = testLib.RestTestCase.ERR_BAD_USERNAME)
+
+
+    def testAdd4(self):
+        respData = self.makeRequest("/users/add", method="POST", data = { 'user' : 'user1', 'password' : 'password'*100} )
+        self.assertResponse(respData, count = None, errCode = testLib.RestTestCase.ERR_BAD_PASSWORD)
+
+    # Tests for user login.
+
+    def testLogin5(self):
+        respData = self.makeRequest("/users/login", method="POST", data = { 'user' : 'user1'*100, 'password' : 'password'} )
+        self.assertResponse(respData, count = None, errCode = testLib.RestTestCase.ERR_BAD_CREDENTIALS)
+
+
+    def testLogin6(self):
+        respData = self.makeRequest("/users/login", method="POST", data = { 'user' : 'user1'*100, 'password' : 'password'} )
+        self.assertResponse(respData, count = None, errCode = testLib.RestTestCase.ERR_BAD_CREDENTIALS)
+
+    def testLogin7(self):
+        respData = self.makeRequest("/users/login", method="POST", data = { 'user' : 'user1', 'password' : 'password'*100} )
+        self.assertResponse(respData, count = None, errCode = testLib.RestTestCase.ERR_BAD_CREDENTIALS)
+
 
 

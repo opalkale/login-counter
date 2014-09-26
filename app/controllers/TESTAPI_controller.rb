@@ -9,11 +9,14 @@ class TestapiController < ApplicationController
   end
 
   def unit_tests
-    exec "rspec"
+    result = %x[rspec]
+    total_tests = result.split(" examples")[0].spilt("\n")[-1].to_i
+    failed_tests = result.split(" failures")[0.split(", ")][-1].to_i
+    
     response_hash = {
-      nrFailed: 0,
-      output: "",
-      totalTests: 5,
+      nrFailed: failed_tests,
+      output: result,
+      totalTests: total_tests,
     }
 
     render json: response_hash

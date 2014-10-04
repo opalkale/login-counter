@@ -7,6 +7,15 @@ MAX_PASSWORD_LENGTH = 128
 MAX_USERNAME_LENGTH = 128
 SUCCESS = 1
 
+ERROR_LOOKUP = {
+  # Constants
+  ERR_BAD_CREDENTIALS => "Invalid username and/or password. Please try again.",
+  ERR_BAD_PASSWORD => "The password should be at most 128 characters long. Please try again.",
+  ERR_BAD_USERNAME => "The user name cannot be empty or over 128 characters. Please try again.",
+  ERR_USER_EXISTS => "This user name already exists. Please try again."
+
+}
+
 class User < ActiveRecord::Base
   
   def self.add(username, password)
